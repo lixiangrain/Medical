@@ -48,6 +48,7 @@ import Carousel from '@/pages/home/carousel/index.vue'
 import Search from './search/index.vue'
 //引入首页等级组件
 import Level from './level/index.vue'
+import type { Content,HospitalResponseData } from '@/api/home/type'
 //引入首页地区选择组件
 import Adress from './adress/index.vue'
 //引入展示医院卡片的结构
@@ -57,11 +58,11 @@ import Car from './car/index.vue'
 //分页器页码
 let pageNo =ref<number>(1);
 //分页器一页展示几条数据
-let pageSize=ref(10)
+let pageSize=ref<number>(10)
 //存储已有的医院的数组
-let hasHospitalArr=ref([])
+let hasHospitalArr=ref<Content>([])
 //存储医院总共个数
-let total=ref(0);
+let total=ref<number>(0);
 //组件挂在完毕：发一次请求
 onMounted(()=>{
   getHospitalInfo()
@@ -71,7 +72,7 @@ onMounted(()=>{
 //获取已有医院的数据
 const getHospitalInfo= async()=>{
   //获取医院的数据：默认获取第一页，一页十个
-  let result:any = await reqHospital(pageNo.value,pageSize.value);
+  let result:HospitalResponseData = await reqHospital(pageNo.value,pageSize.value);
   if(result.code==200){
     //存储已有医院的数据
    hasHospitalArr.value = result.data.content;
