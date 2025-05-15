@@ -11,6 +11,6 @@ enum API {
 }
 
 //获取医院的数据
-export const reqHospital =(page:number,limit:number,hostype='',districtCode='') =>request.get<any,HospitalResponseData>(API.HOSPITAL_URL+`${page}/${limit}?hostype=${hostype}$districtCode=${districtCode}`)
+export const reqHospital =(page:number,limit:number,hostype='',districtCode='') =>request.get<any,HospitalResponseData>(API.HOSPITAL_URL+`${page}/${limit}?hostype=${hostype}&districtCode=${districtCode}`)
 //获取医院等级或者地区
 export const reqHospitallevelAndRegion =(dictcode:string) =>request.get<any,HospitallevelAndRegionResponseData>(API.HOSPITALLEVELANDREGION_URL+`${dictcode}`)
