@@ -26,7 +26,7 @@ export interface hospital{
     logoData:string
     intro:string
     route:string
-    status:number
+    status:string
     bookingRule:{
         cycle:number
         releaseTime:string
@@ -91,3 +91,11 @@ export type HospitallevelAndRegionArr=HospitallevelAndRegion[]
 export interface HospitallevelAndRegionResponseData extends ResponseData {
     data:HospitallevelAndRegionArr
 }
+
+//
+export interface HospitalInfo extends ResponseData {
+    data:Content
+}
+
+
+
