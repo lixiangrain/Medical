@@ -39,9 +39,13 @@ const getRegion= async ()=>{
     }
     
 }
+//点击不同区域按钮回调
 const changeRegion=(region:string)=>{
     RegionFlag.value=region
+    //给父组件传递区域的参数
+    $emit('getRegion',region)
 }
+let $emit =defineEmits(['getRegion'])
 </script>
 
 <script lang="ts" >

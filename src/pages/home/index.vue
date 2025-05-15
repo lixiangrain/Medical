@@ -11,13 +11,14 @@
         <!-- 这个结构将行分为了二十四份 -->
           <el-col :span="20">
             <!-- 等级子组件 -->
-              <Level></Level>
+              <Level @getLevel="getLevel"></Level>
             <!-- 地区子组件 -->
-             <Adress></Adress>
+             <Adress @getRegion="getRegion"></Adress>
              <!-- 展示医院卡片的结构 -->
-              <div class="hospital">
+              <div class="hospital" v-if="hasHospitalArr.length>0">
                 <Car v-for="(item,index) in hasHospitalArr" :key="index" class="item" :hospitalInfo="item"></Car>
               </div>
+              <el-empty v-else description="没有医院" />
               <!-- 分页器 -->
                  <el-pagination
                   v-model:current-page="pageNo"
@@ -63,6 +64,12 @@ let pageSize=ref<number>(10)
 let hasHospitalArr=ref<Content>([])
 //存储医院总共个数
 let total=ref<number>(0);
+//存储医院等级的响应式数组
+let hostype =ref<string>('')
+//存储医院地区
+let districtCode=ref<string>('')
+
+
 //组件挂在完毕：发一次请求
 onMounted(()=>{
   getHospitalInfo()
@@ -72,7 +79,7 @@ onMounted(()=>{
 //获取已有医院的数据
 const getHospitalInfo= async()=>{
   //获取医院的数据：默认获取第一页，一页十个
-  let result:HospitalResponseData = await reqHospital(pageNo.value,pageSize.value);
+  let result:HospitalResponseData = await reqHospital(pageNo.value,pageSize.value,hostype.value,districtCode.value);
   if(result.code==200){
     //存储已有医院的数据
    hasHospitalArr.value = result.data.content;
@@ -94,6 +101,20 @@ function sizeChange(){
   //再次发请求获取医院数据
   getHospitalInfo()
   
+}
+
+//子组件自定义事件：获取儿子给父组件传递来的等级参数
+const getLevel =(Level:string)=>{
+  //收集参数:等级
+  hostype.value=Level
+  //再次发请求
+  getHospitalInfo()
+}
+//获取子组件传递过来的地区参数
+const getRegion=(Region:string)=>{
+  //存储地区参数
+  districtCode.value=Region
+  getHospitalInfo()
 }
 </script>
 

@@ -47,8 +47,11 @@ const changeLevel= (level:string)=>{
    // console.log(level);
    //高亮响应式数据存储level数值
    activeFlag.value=level
+   //触发自定义事件：将医院等级参数传递给父组件
+   $emit('getLevel',level)
    
 }
+let $emit = defineEmits(['getLevel'])
 </script>
 
 <script lang="ts">
