@@ -32,7 +32,7 @@
                 />
           </el-col>
           <el-col :span="4">
-              456
+              <Tip></Tip>
           </el-col>
        </el-row>
  </div>
@@ -54,6 +54,8 @@ import type { Content,HospitalResponseData } from '@/api/home/type'
 import Adress from './adress/index.vue'
 //引入展示医院卡片的结构
 import Car from './car/index.vue'
+//引入右侧组件
+import Tip from './tip/index.vue'
 
 //分页器需要的数字
 //分页器页码
