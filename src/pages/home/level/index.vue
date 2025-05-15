@@ -5,12 +5,8 @@
     <div class="content">
          <div class="left">等级:</div>
          <ul class="hospital">
-            <li class="active">全部</li>
-            <li>三级甲等</li>
-            <li>三级乙等</li>
-            <li>三级乙等</li>
-            <li>全部</li>
-            <li>全部</li>
+            <li :class="{active:activeFlag==''}" @click="changeLevel('')">全部</li>
+            <li v-for="level in levelArr" :class="{active:activeFlag==level.value}" :key="level.value" @click="changeLevel(level.value)">{{level.name}}</li>
          </ul>
     </div>
 
@@ -19,7 +15,46 @@
 </template>
 
 <script setup lang='ts'>
+import { reqHospitallevelAndRegion } from '@/api/home';
+import { onMounted,ref } from 'vue';
+import type { HospitallevelAndRegionArr, HospitallevelAndRegionResponseData } from '@/api/home/type';
+//定义一个数组存储医院等级
+let levelArr=ref<HospitallevelAndRegionArr>([])
+//控制医院等级高亮的响应式数组
 
+let activeFlag=ref<string>('')
+
+
+//组件挂载完毕
+
+onMounted(()=>{
+   getLevel()
+})
+
+//获取医院等级数据
+const getLevel = async () =>{
+   let res:HospitallevelAndRegionResponseData =await reqHospitallevelAndRegion('HosType');
+   //测试请求是否成功
+   // console.log(res);
+   //存储医院等级的数据
+   if(res.code=200) {
+      levelArr.value=res.data
+   }
+   
+}
+const changeLevel= (level:string)=>{
+   //level存储的是每个等级的value
+   // console.log(level);
+   //高亮响应式数据存储level数值
+   activeFlag.value=level
+   
+}
+</script>
+
+<script lang="ts">
+   export default {
+      name:'Level'
+   }
 </script>
 
 <style scoped>
