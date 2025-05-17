@@ -15,6 +15,8 @@ const app = createApp(App)
 //引入全局组件---底部、顶部都是全局组件
 import HospitalTop from '@/components/hospitalTop/index.vue'
 import HospitalBottom from '@/components/hospitalBotton/index.vue'
+//引入pinia仓库
+import pinia from "@/store"
 
 //引入element-plus国际化
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
@@ -23,6 +25,8 @@ app.component('HospitalTop',HospitalTop)
 app.component('HospitalBottom',HospitalBottom)
 
 
+//安装pinia仓库
+app.use(pinia)
 
 //安装element-plus插件
 app.use(ElementPlus,{

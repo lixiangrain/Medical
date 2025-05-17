@@ -44,6 +44,11 @@
 </template>
 
 <script setup lang='ts'>
+  //引入生命周期函数
+  import { onMounted } from 'vue';
+  import useDetailStore from '@/store/modules/hospitalDetails';
+  //获取仓库对象
+  let detailStore=useDetailStore()
    //左侧导航区所需要的图标
    import { Document,Menu as iconMenu,Location,Setting } from '@element-plus/icons-vue';
    import { useRouter,useRoute } from 'vue-router';
@@ -56,6 +61,10 @@
       //跳转到对应的二级路由
       $router.push({path})
    }
+   //组件挂在完毕，通知pinia仓库发请求获取医院详情数据存储于仓库之中
+   onMounted(()=>{
+      detailStore.getHospital($route.query.hoscode);
+   })
 </script>
 
 <style scoped>

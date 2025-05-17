@@ -45,7 +45,7 @@ const fetchdata=async (keyword:string,cd:any)=>{
 const goDetail=(item:any)=>{
     console.log(item);
     //点击推荐项进入医院的详情页，将来需要携带query参数（医院的编码）
-    $router.push({path:'/hospital/register'})
+    $router.push({path:'/hospital/register',query:{hoscode:item.hospitalInfo.hoscode}})
     
 }
 //深度选择器：>>>/deep/ :deep
