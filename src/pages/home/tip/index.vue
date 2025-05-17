@@ -84,6 +84,13 @@
    }
    .tip .header .left {
       display: flex;
+      justify-content: center;
+      justify-items: center;
+   }
+   .tip .header .right {
+      display: flex;
+      justify-content: center;
+      justify-items: center;
    }
    span {
       margin-left: 5px;

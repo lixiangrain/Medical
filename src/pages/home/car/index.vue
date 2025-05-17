@@ -34,7 +34,7 @@ let $router=useRouter()
 const goDetail=()=>{
     console.log(porps.hospitalInfo);
     
-    $router.push({path:'/hospital'})
+    $router.push({path:'/hospital/register'})
     
 }
 //接收父组件传递过来的props->即为已有的医院的数据
