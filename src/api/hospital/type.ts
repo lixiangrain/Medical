@@ -21,7 +21,7 @@ export interface HospitalDetail {
         updateTime:string
         isDeleted:number
         param:{
-            hostypeSrting:string
+            hostypeString:string
             fullAddress:string
         },
         hoscode:string
