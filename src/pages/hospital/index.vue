@@ -59,11 +59,11 @@
    //左侧菜单点击事件的回调
    const changeActive=(path:string)=>{
       //跳转到对应的二级路由
-      $router.push({path})
+      $router.push({path,query:{hoscode:$route.query.hoscode}})
    }
    //组件挂在完毕，通知pinia仓库发请求获取医院详情数据存储于仓库之中
    onMounted(()=>{
-      detailStore.getHospital($route.query.hoscode);
+      detailStore.getHospital($route.query.hoscode as string);
    })
 </script>
 
